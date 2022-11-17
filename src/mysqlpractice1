@@ -27,3 +27,76 @@ mysql> desc transactions;
 | customer_id  | int         | YES  | MUL | NULL    |                |
 +--------------+-------------+------+-----+---------+----------------+
 4 rows in set (0.00 sec)
+
+
+insert into customer(accountno,customername,mobileno,email,address) values(123,'Vijaya',98765,'vijaya@gmail.com','Mumbai');
+insert into customer(accountno,customername,mobileno,email,address) values(124,'Amit',54453,'amit@gmail.com','Pune');
+insert into customer(accountno,customername,mobileno,email,address) values(125,'Ketaki',65842,'ketaki@gmail.com','Delhi');
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',5000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',500,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',800,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',2000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',1000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',50000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',5000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',4000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',3000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',1000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer cust inner join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id;
+
+mysql>select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id where cust.id = 1;
+
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust left join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust left join transactions trans on cust.id = trans.customer_id;
+
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id order by amount;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id order by amount desc;
+mysql> select * from customer where id not in (select customer_id from transactions);
+mysql> select * from customer where id  in (select customer_id from transactions);
+mysql> select sum(amount) from customer c inner join transactions t on c.id = t.customer_id group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|       61000 |
+|       11300 |
++-------------+
+mysql> select sum(amount) from customer c inner join transactions t on c.id = t.customer_id where t.account_type = 'Credit' and c.id = 1  group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|        6000 |
++-------------+
+mysql> select sum(amount) from customer c inner join transactions t on c.id = t.customer_id where t.account_type = 'Credit' and c.id = 2  group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|       55000 |
++-------------+
+
+
+
+
+
