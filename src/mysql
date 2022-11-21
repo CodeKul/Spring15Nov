@@ -81,3 +81,4 @@ Questions:
 --> select e.job,e.empno,e.ename,IFNULL(e.sal,0) + IFNULL(e.comm,0) as totalSalary,d.dname,d.loc from emp e inner join dept d
     on e.deptno = d.deptno where e.job = 'MANAGER';
 
+
