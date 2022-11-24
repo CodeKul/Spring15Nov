@@ -23,4 +23,13 @@ ItemMaster
 6. subTotal	     amount
 7. freight
 8. tax
-9. total
+9. orderTotal
+
+1. @ the time of insertion
+	amount =  (qty * unitprice)
+show the details of purchase order
+Sr No PoNumber PoDate Item quantity unitPrice amount
+
+update  orderTotal against ponumber
+1. update subtotal = sum(amount)
+2. calculate order total = subtotal+freight+tax
