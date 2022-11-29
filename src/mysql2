@@ -33,3 +33,13 @@ Sr No PoNumber PoDate Item quantity unitPrice amount
 update  orderTotal against ponumber
 1. update subtotal = sum(amount)
 2. calculate order total = subtotal+freight+tax
+
+mysql> insert into PurchaseOrder(CompanyId,PoNumber,PoDate,VendorId)values(1,'PO/22-23/1',now(),1);
+mysql>insert into PurchaseOrderDetails(purchaseId,itemId,Quantity,unitPrice,amount)values(1,1,2,25000,(25000*2));
+
+mysql>  select PoNumber,PoDate, i.ItemName,pod.Quantity,pod.unitPrice,pod.Amount
+    ->  from PurchaseOrder po
+    ->  inner join PurchaseOrderDetails pod on po.id = pod.purchaseId
+    ->  inner join ItemMaster i on i.id = pod.itemId;
+mysql> update PurchaseOrder set SubTotal = 50000,freight = 250,Tax = 6000 where id = 1;
+mysql> update PurchaseOrder set Total = (SubTotal+freight+Tax);

@@ -1,0 +1,26 @@
+CompanyMaster   VendorMaster
+1. id		    id
+2. companyName	vendorName
+3. address
+4. city
+5. state
+6. zip
+7. gstNo
+
+ItemMaster
+1. id
+2. itemName
+3. quantity
+4. unitPrice
+5. actualRate
+
+  PurchaseOrder PurchaseOrderDetails
+1. id		    id
+2. @companyId	@poId
+3. poNumber      @itemId
+4. poDate        quantity
+5. @vendorId     unitPrice
+6. subTotal	     amount
+7. freight
+8. tax
+9. total
